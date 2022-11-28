@@ -12,7 +12,7 @@ export const getIssueList = async (pageNumber: number) => {
     state: "open",
     sort: "comments",
     page: pageNumber,
-    per_page: 10
+    per_page: 20
   });
   return data;
 };
