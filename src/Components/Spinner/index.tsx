@@ -1,23 +1,36 @@
 import styled, { keyframes } from "styled-components";
+import { GoSync } from "react-icons/go";
 
-const rotation = keyframes`
-    from{
-        transform: rotate(0deg);
+const rotateAnim = keyframes`
+    0% {
+        transform:rotate(0deg);
     }
-    to{
-        transform: rotate(360deg);
+    50% {
+        transform: rotate(180deg) ;
+    }
+    100% {
+        transform:rotate(360deg) ;
+        
     }
 `;
-
-const Spinner = styled.div`
-  height: 10rem;
-  width: 10rem;
-  border: 3px solid #b3b3b3;
-  border-radius: 50%;
-  border-top: none;
-  border-right: none;
-  margin: auto;
-  animation: ${rotation} 1s linear infinite;
+const SpinnerWrapper = styled.div`
+  padding: 1rem;
+  font-size: 32px;
+  text-align: center;
+  margin: 0 auto;
+  width: 70px;
+  height: 70px;
+  color: #5a5a5a;
+  & .icon {
+    animation: ${rotateAnim} 1s infinite linear;
+  }
 `;
 
+const Spinner = () => {
+  return (
+    <SpinnerWrapper>
+      <GoSync className="icon" />
+    </SpinnerWrapper>
+  );
+};
 export default Spinner;
