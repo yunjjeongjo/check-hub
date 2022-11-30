@@ -20,7 +20,7 @@ const SpinnerWrapper = styled.div`
   margin: 0 auto;
   width: 70px;
   height: 70px;
-  color: #5a5a5a;
+  color: #8394be;
   & .icon {
     animation: ${rotateAnim} 1s infinite linear;
   }
