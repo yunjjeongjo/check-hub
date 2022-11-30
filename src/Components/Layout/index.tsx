@@ -1,18 +1,12 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
-import Header from "../Header";
 
 interface Props {
   children: ReactElement;
 }
 
 const Layout = ({ children }: Props) => {
-  return (
-    <Container>
-      <Header></Header>
-      {children}
-    </Container>
-  );
+  return <Container>{children}</Container>;
 };
 
 const Container = styled.div`
