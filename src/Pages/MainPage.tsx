@@ -54,7 +54,7 @@ const MainPage = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [sortState, activeState]);
   return (
     <>
       <Filter>
