@@ -1,31 +1,56 @@
 import styled from "styled-components";
 import { getIssueList } from "@/lib/api/issueApi";
 import { Endpoints } from "@octokit/types";
-import { useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import IssueItem from "../IssueItem";
 import useIntersectionObserver from "@/lib/hooks/useIntersectionObserver";
 import Spinner from "../Spinner";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  issueActiveState,
+  issueSortState,
+  issueState
+} from "@/lib/states/atoms";
+import { sorts, states } from "@/lib/constants/state";
+import Dropdown from "@/Components/Dropdown";
+type IssueListType =
+  Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
 
 interface Props {
-  owner: string;
-  repo: string;
+  issueList: IssueListType;
 }
 
-const IssueList = ({ owner, repo }: Props) => {
-  type IssueListType =
-    Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
+const IssueList = ({ issueList }: Props) => {
+  const { owner, repo } = useRecoilValue(issueState);
+
+  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
-  const [data, setData] = useState<IssueListType>([]);
+  const [data, setData] = useState<IssueListType>(issueList);
   const [isLoading, setIsLoading] = useState(false);
+  const activeState = useRecoilValue(issueActiveState);
+  const sortState = useRecoilValue(issueSortState);
 
   const getData = async () => {
-    setIsLoading(true);
-    setPage((page) => page + 1);
-    const res = await getIssueList(page, owner, repo);
-    setData([...data, ...res]);
-    console.log(data);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      setPage((page) => page + 1);
+      const res = await getIssueList(page, owner, repo, activeState, sortState);
+      if (res) {
+        setData([...data, ...res]);
+      }
+      setIsLoading(false);
+    } catch (e) {
+      swal(
+        "이슈 검색 실패",
+        "owner 또는 repository가 존재하지 않습니다.",
+        "error"
+      ).then(() => {
+        navigate("/");
+      });
+    }
   };
 
   const observerRef = useIntersectionObserver(
@@ -54,11 +79,11 @@ const IssueList = ({ owner, repo }: Props) => {
 const IssueListContainer = styled.div`
   height: 100%;
   width: 100%;
+  padding-top: 20px;
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
 `;
 
 const Target = styled.div`
