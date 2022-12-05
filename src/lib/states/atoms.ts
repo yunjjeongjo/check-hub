@@ -5,7 +5,7 @@ const { persistAtom } = recoilPersist();
 
 export const issueState = atom({
   key: "issueState",
-  default: { owner: "", repo: "" },
+  default: { owner: "facebook", repo: "react" },
   effects_UNSTABLE: [persistAtom]
 });
 
