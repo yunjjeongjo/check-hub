@@ -14,6 +14,7 @@ import Dropdown from "@/Components/Dropdown";
 import styled from "styled-components";
 import { sorts, states } from "@/lib/constants/state";
 import { IssueListType } from "@/lib/types/types";
+import ScrollToTop from "@/Components/ScrollToTop/ScrollToTop";
 
 const MainPage = () => {
   const [activeState, setActiveState] = useRecoilState(issueActiveState);
@@ -76,6 +77,7 @@ const MainPage = () => {
         </Dropdown>
       </Filter>
       {isLoading ? <Spinner /> : <IssueList issueList={data}></IssueList>}
+      <ScrollToTop></ScrollToTop>
     </>
   );
 };
