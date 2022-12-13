@@ -8,9 +8,7 @@ import dayjs from "dayjs";
 import Markdown from "@/Components/Markdown";
 import { useRecoilValue } from "recoil";
 import { issueState } from "@/lib/states/atoms";
-
-type ReposResponse =
-  Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}"]["response"]["data"];
+import { ReposResponse } from "@/lib/types/types";
 
 const DetailPage = () => {
   const { id } = useParams();

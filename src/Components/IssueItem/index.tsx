@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { Endpoints } from "@octokit/types";
 import dayjs from "dayjs";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-type IssueListType =
-  Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
-
+import { IssueListType } from "@/lib/types/types";
 export interface IssueCardProps {
   issue: IssueListType[number];
 }

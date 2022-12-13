@@ -6,7 +6,6 @@ import {
 } from "@/lib/states/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import swal from "sweetalert";
-import { Endpoints } from "@octokit/types";
 import { ChangeEvent, useState, useEffect } from "react";
 import { getIssueList } from "@/lib/api/issueApi";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +13,7 @@ import Spinner from "@/Components/Spinner";
 import Dropdown from "@/Components/Dropdown";
 import styled from "styled-components";
 import { sorts, states } from "@/lib/constants/state";
+import { IssueListType } from "@/lib/types/types";
 
 const MainPage = () => {
   const [activeState, setActiveState] = useRecoilState(issueActiveState);
@@ -31,8 +31,6 @@ const MainPage = () => {
     setSortState(e.target.value);
   };
 
-  type IssueListType =
-    Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
   const getData = async () => {
     try {
       setIsLoading(true);

@@ -1,22 +1,18 @@
 import styled from "styled-components";
 import { getIssueList } from "@/lib/api/issueApi";
-import { Endpoints } from "@octokit/types";
-import { ChangeEvent, useState, useEffect } from "react";
+import { useState } from "react";
 import IssueItem from "../IssueItem";
 import useIntersectionObserver from "@/lib/hooks/useIntersectionObserver";
 import Spinner from "../Spinner";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
+import { IssueListType } from "@/lib/types/types";
 import {
   issueActiveState,
   issueSortState,
   issueState
 } from "@/lib/states/atoms";
-import { sorts, states } from "@/lib/constants/state";
-import Dropdown from "@/Components/Dropdown";
-type IssueListType =
-  Endpoints["GET /repos/{owner}/{repo}/issues"]["response"]["data"];
 
 interface Props {
   issueList: IssueListType;
