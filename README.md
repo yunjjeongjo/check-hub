@@ -61,6 +61,7 @@ https://eloquent-torrone-6c38d3.netlify.app/
 - [x] 각 행에는 ‘이슈번호, 이슈제목, 작성자, 작성일, 코멘트수’를 표시
 - [x] 이슈 목록 state(open, closed, all), sort(comments, created, updated)별로 필터링 구현
 - [x] 화면을 아래로 스크롤 할 시 이슈 목록 무한스크롤 구현
+- [x] 화면 상단 스크롤 버튼 추가
 
 ### 이슈 상세 페이지
 - [x] ‘이슈번호, 이슈제목, 작성자, 작성일, 코멘트 수, 작성자 프로필 이미지, 본문' 표시
